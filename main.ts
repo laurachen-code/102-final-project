@@ -1,7 +1,7 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.y += -30
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`transparency16`, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, function (sprite, location) {
     info.changeScoreBy(1)
     tiles.setTileAt(location, assets.tile`transparency16`)
 })
@@ -40,6 +40,10 @@ let myEnemy = sprites.create(img`
     ........................
     ........................
     `, SpriteKind.Enemy)
+for (let value of tiles.getTilesByType(assets.tile`myTile`)) {
+    tiles.placeOnTile(myEnemy, value)
+    tiles.setTileAt(value, sprites.builtin.forestTiles4)
+}
 game.onUpdate(function () {
     mySprite.setVelocity(0, 60)
 })
